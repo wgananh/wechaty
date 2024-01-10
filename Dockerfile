@@ -10,11 +10,6 @@ ENV NPM_CONFIG_LOGLEVEL warn
 # Instal the 'apt-utils' package to solve the error 'debconf: delaying package configuration, since apt-utils is not installed'
 # https://peteris.rocks/blog/quiet-and-unattended-installation-with-apt-get/
 
-# 更改 Debian apt 源
-RUN sed -i 's/http:\/\/deb.debian.org/mirrors.tencent.com/g' /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get install -y nodejs npm
-
 # npm 源，选用国内镜像源以提高下载速度
 RUN npm config set registry https://mirrors.cloud.tencent.com/npm/
 # RUN npm config set registry https://registry.npm.taobao.org/
