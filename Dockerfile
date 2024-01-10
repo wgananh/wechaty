@@ -9,6 +9,16 @@ ENV NPM_CONFIG_LOGLEVEL warn
 
 # Instal the 'apt-utils' package to solve the error 'debconf: delaying package configuration, since apt-utils is not installed'
 # https://peteris.rocks/blog/quiet-and-unattended-installation-with-apt-get/
+
+# 安装依赖包，如需其他依赖包，请到alpine依赖包管理(https://pkgs.alpinelinux.org/packages?name=php8*imagick*&branch=v3.13)查找。
+# 选用国内镜像源以提高下载速度
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositories \
+&& apk add --update --no-cache nodejs npm
+
+# npm 源，选用国内镜像源以提高下载速度
+RUN npm config set registry https://mirrors.cloud.tencent.com/npm/
+# RUN npm config set registry https://registry.npm.taobao.org/
+
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     apt-utils \
